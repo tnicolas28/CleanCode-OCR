@@ -39,3 +39,5 @@ function parseLine(line: string): string {
 function parseFile(file: string): string[] {
     return file.split("  \n").map(line=>parseLine(line));
 }
+
+console.log(parseFile(readFileData("ocr-input.txt")));
