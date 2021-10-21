@@ -7,14 +7,6 @@ function readFileData(filePath: string): string {
     return file;
 }
 
-function displayInput(input : string) : void {
-    console.log(input);
-    for (let i = 0; i < input.length ; i++)
-    {
-        console.log(`${i} : ${input[i]}`);
-    }
-}
-
 function parseNumber(number : string) : string {
     let parsed = [ 2021980254, -1511113376, 302713119, 302801439, 91790205, 1966627615, 1966539203, 360985215, 1963798431, 1963886843];
     let hashedNumber = -number.split('')
