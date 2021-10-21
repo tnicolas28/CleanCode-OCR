@@ -16,10 +16,9 @@ function displayInput(input : string) : void {
 }
 
 function parseNumber(number : string): number {
-    let parsed = [4462,2820,3581,3765,3503,3581,4225,2946,4777,4133];
-    let x = 0;
-    number.split('')
-          .forEach((e, i)=> x += e.charCodeAt(0)*(i+1));
+    let parsed = [ 2021980254, -1511113376, 302713119, 302801439, 91790205, 1966627615, 1966539203, 360985215, 1963798431, 1963886843];
+    let x = -number.split('')
+                   .reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
     return parsed.indexOf(x);
 }
 
