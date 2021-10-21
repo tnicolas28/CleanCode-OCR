@@ -20,9 +20,11 @@ function parseNumber(number : string): number {
     let x = 0;
     number.split('')
           .forEach((e, i)=> x += e.charCodeAt(0)*(i+1));
-    return parsed.indexOf(x);
+    return x//parsed.indexOf(x);
 }
 
+console.log(parseNumber(" _ |_  _|"))
+console.log(parseNumber(" _  _||_ "))
 
 function parseLine(line: string): string {
     let number = "";
@@ -40,4 +42,31 @@ function parseFile(file: string): string[] {
     return file.split("  \n").map(line=>parseLine(line));
 }
 
-console.log(parseFile(readFileData("ocr-input.txt")));
+function calculateChecksum(digitSerie : string) : number
+{
+    let checksum = 0;
+    for(let i = digitSerie.length - 1 , j = 1; i >= 0; i--, j++)
+    {
+        checksum += (j*Number(digitSerie[i]));
+        console.log(`${j}*${digitSerie[i]}`);
+    }
+
+    return checksum;
+}
+
+function verifyIfChecksumIsValid(checkSum : number)
+{
+  if(checkSum % 11 === 0)
+  {
+    return true;
+  }
+  else
+  {
+    return false;
+  }
+}
+
+const arrayContainingNumbers = parseFile(readFileData("ocr-input.txt"));
+//console.log(arrayContainingNumbers);
+//const checksum               = calculateChecksum(arrayContainingNumbers[0]);
+
