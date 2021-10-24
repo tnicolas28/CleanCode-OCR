@@ -68,12 +68,12 @@ function writeOutputInFile(arrayContainingSerie : Array<string>,fileName : strin
     {
         const serie     = arrayContainingSerie[i];
         const checksum  = calculateChecksum(serie);
-        data = writeLineAnomalies(serie, data, checksum);
+        data = addOutputLinesSuffixes(serie, data, checksum);
     }
     fs.writeFileSync(`${fileName}.txt`,data);
 }
 
-function writeLineAnomalies(serie: string, data: string, checksum: number) {
+function addOutputLinesSuffixes(serie: string, data: string, checksum: number) {
     if (serie.includes('?')) {
         data += `${serie} ILL\n\r`;
     }
