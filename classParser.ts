@@ -63,5 +63,3 @@ export default class Parser {
         return file.split("  \n").map(line=>this.parseLine(line));
     }
 }
-
-module.exports = Parser;

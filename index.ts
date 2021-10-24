@@ -9,5 +9,3 @@ let fileObject          = new File(filePathToParse,fileNameToWriteIn);
 const arrayContainingSerie = parserObject.parseFile(fileObject.readFileData());
 fileObject.writeOutputInFile(arrayContainingSerie);
 
-
-
