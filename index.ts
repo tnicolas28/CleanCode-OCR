@@ -8,6 +8,7 @@ function readFileData(filePath: string): string {
 }
 
 function parseNumber(number : string) : string {
+    //"Parsed" repérsente quoi ? Peut être un nom plus explicit
     let parsed = [ 2021980254, -1511113376, 302713119, 302801439, 91790205, 1966627615, 1966539203, 360985215, 1963798431, 1963886843];
     let hashedNumber = -number.split('')
                    .reduce((a,b)=>{a=((a<<5)-a)+b.charCodeAt(0);return a&a},0);
@@ -67,24 +68,26 @@ function writeOutputInFile(arrayContainingSerie : Array<string>,fileName : strin
     {
         const serie     = arrayContainingSerie[i];
         const checksum  = calculateChecksum(serie);
-        if(serie.includes('?'))
-        {
-            data += `${serie} ILL\n\r`;
-        }
-        else
-        {
-            if(verifyIfChecksumIsValid(checksum))
-            {
-                data += `${serie}\n\r`;
-            }
-            else
-            {
-                data += `${serie} ERR\n\r`;
-            }
-        }
+        data = writeLineAnomalies(serie, data, checksum);
+    }
+    fs.writeFileSync(`${fileName}.txt`,data);
+}
+
+function writeLineAnomalies(serie: string, data: string, checksum: number) {
+    if (serie.includes('?')) {
+        data += `${serie} ILL\n\r`;
     }
 
-    fs.writeFileSync(`${fileName}.txt`,data);
+    else {
+        if (verifyIfChecksumIsValid(checksum)) {
+            data += `${serie}\n\r`;
+        }
+
+        else {
+            data += `${serie} ERR\n\r`;
+        }
+    }
+    return data;
 }
 
 function isNumberReadable(arrayContainingHashedNumber : Array<number>,hash : number) : boolean
